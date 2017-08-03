@@ -2,7 +2,6 @@ package com.example.e610.capstoneproject.Utils;
 
 
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.example.e610.capstoneproject.Models.Example;

@@ -1,39 +1,12 @@
 
 package com.example.e610.capstoneproject.Models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+import java.io.Serializable;
 
-public class Castings implements Parcelable
+public class Castings implements Serializable
 {
 
-    public Links links;
-    public final static Creator<Castings> CREATOR = new Creator<Castings>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Castings createFromParcel(Parcel in) {
-            Castings instance = new Castings();
-            instance.links = ((Links) in.readValue((Links.class.getClassLoader())));
-            return instance;
-        }
-
-        public Castings[] newArray(int size) {
-            return (new Castings[size]);
-        }
-
-    }
-    ;
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(links);
-    }
-
-    public int describeContents() {
-        return  0;
-    }
+    public Links___ links;
+    private final static long serialVersionUID = 599272827619753450L;
 
 }
