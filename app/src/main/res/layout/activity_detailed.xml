@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.e610.capstoneproject.DetailedActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/asd">
+        android:id="@+id/asd1">
 
     </RelativeLayout>
 
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/ic_share"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
+        app:layout_anchorGravity="bottom|right|end"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/share_fab"
+
+        />
+
+
+</FrameLayout>

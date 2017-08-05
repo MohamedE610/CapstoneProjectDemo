@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.e610.capstoneproject">
+    package="com.exampleAnime.e610.capstoneproject">
     -- Permissions --
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,31 +17,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.e610.capstoneproject.Activitys.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.e610.capstoneproject.Activitys.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
-            android:name=".SignupActivity"
+            android:name="com.example.e610.capstoneproject.Activitys.SignupActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name="com.example.e610.capstoneproject.Activitys.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".NavigationDrawerActivity"
-            android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".DetailedActivity"></activity>
+        <activity android:name="com.example.e610.capstoneproject.Activitys.DetailedActivity"></activity>
+
+        <provider
+            android:name="com.example.e610.capstoneproject.Data.AnimeProvider"
+            android:authorities="3bd.el3al.AnimeSan"
+            android:exported="true"></provider>
+
     </application>
 
 </manifest>

@@ -4,9 +4,6 @@ package com.example.e610.capstoneproject.Utils;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.e610.capstoneproject.Models.Example;
-import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,9 +25,18 @@ public class FetchData extends AsyncTask<Void,Void,String> {
 
     NetworkResponse networkResponse;
 
+    public FetchData(String url){
+        BasicUrl=url;
+    }
+
+    public FetchData( ){
+
+    }
+
     public void setNetworkResponse(NetworkResponse networkResponse) {
         this.networkResponse = networkResponse;
     }
+
 
     public String Fetching_Data(String UrlKey) {
         HttpURLConnection urlConnect = null;
@@ -94,9 +100,8 @@ public class FetchData extends AsyncTask<Void,Void,String> {
 
             JsonData = Fetching_Data(BasicUrl);
 
-            Gson gson = new Gson();
-
-            Example example=gson.fromJson(JsonData, Example.class);
+        /*    Gson gson = new Gson();
+            ExampleAnime example=gson.fromJson(JsonData, ExampleAnime.class);*/
 
 
             if(JsonData.equals("")||JsonData==null) {
