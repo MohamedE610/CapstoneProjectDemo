@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="5dp">
+                    android:layout_margin="10dp">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,11 +91,11 @@
                             android:id="@+id/sw_txt"
                             android:textAlignment="center"/>
                         <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_width="@dimen/fav_width"
+                            android:layout_height="@dimen/fav_height"
                             android:id="@+id/start_watch_img"
                             android:layout_below="@+id/sw_txt"
-                            android:src="@drawable/ic_favorite_border"
+                            android:src="@drawable/favorite"
                             />
                     </RelativeLayout>
 
@@ -112,11 +112,11 @@
                             android:text="Favourite"
                             android:id="@+id/f_txt"/>
                         <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_width="@dimen/fav_width"
+                            android:layout_height="@dimen/fav_height"
                             android:id="@+id/favourite_img"
                             android:layout_below="@+id/f_txt"
-                            android:src="@drawable/ic_favorite_border"
+                            android:src="@drawable/favorite"
                             />
                     </RelativeLayout>
                     <RelativeLayout
@@ -132,11 +132,11 @@
                             android:id="@+id/c_txt"
                             android:textAlignment="center"/>
                         <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="100dp"
+                            android:layout_width="@dimen/fav_width"
+                            android:layout_height="@dimen/fav_height"
                             android:id="@+id/completed_img"
                             android:layout_below="@+id/c_txt"
-                            android:src="@drawable/ic_favorite_border"
+                            android:src="@drawable/favorite"
                             />
                     </RelativeLayout>
                 </RelativeLayout>
@@ -216,6 +216,29 @@
                     android:textSize="20sp"
                     android:paddingBottom="8dp"
                     android:id="@+id/ep_duration"/>
+                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Trailer"
+                    android:background="@android:color/holo_orange_light"
+                    android:textSize="30sp"
+                    android:paddingBottom="3dp"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click here"
+                    android:textSize="20sp"
+                    android:textAlignment="center"/>
+
+                 <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="3dp"
+                     android:layout_margin="10dp"
+                    android:id="@+id/trailer"/>
+
             </LinearLayout>
         </ScrollView>
     </android.support.v4.widget.NestedScrollView>

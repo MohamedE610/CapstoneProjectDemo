@@ -1,6 +1,7 @@
 package com.example.e610.capstoneproject.Fragments;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -63,6 +64,7 @@ public class AnimeDetailedFragment extends Fragment {
         favourite=(ImageView)view.findViewById(R.id.favourite_img);
         completed=(ImageView)view.findViewById(R.id.completed_img);
         startWatch=(ImageView)view.findViewById(R.id.start_watch_img);
+        trailer=(ImageView)view.findViewById(R.id.trailer);
 
         Bundle bundle=getArguments();
         anime=(Datum) bundle.getSerializable("dat");
@@ -80,11 +82,29 @@ public class AnimeDetailedFragment extends Fragment {
         Picasso.with(getActivity()).load(anime.attributes.coverImage.original).placeholder(R.drawable.asd)
                 .error(R.drawable.asd).into(cover);
 
+        Picasso.with(getActivity()).load("https://img.youtube.com/vi/"+anime.attributes.youtubeVideoId+"/hqdefault.jpg").placeholder(R.drawable.asd)
+                .error(R.drawable.asd).into(trailer);
+
+        if(isFavorite())
+            favourite.setImageResource(R.drawable.unfavorite);
+        else
+            favourite.setImageResource(R.drawable.favorite);
+
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!isFavorite())
+                    addToFavorite();
+                else
+                    removeFromFavorites();
+            }
+        });
 
         return view;
     }
 
-    public void markAsFavorite() {
+    public void addToFavorite() {
 
         new AsyncTask<Void, Void, Void>() {
 
@@ -110,43 +130,7 @@ public class AnimeDetailedFragment extends Fragment {
             @Override
             protected void onPostExecute(Void aVoid) {
                 Toast.makeText(getContext(),"Anime Saved",Toast.LENGTH_SHORT).show();
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-}
- /*public void markAsFavorite() {
-
-        new AsyncTask<Void, Void, Void>() {
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                if (!isFavorite()) {
-                    ContentValues movieValues = new ContentValues();
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_ID,
-                            seriesModel.getId());
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_TITLE,
-                            seriesModel.getTitle());
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_POSTER_PATH,
-                            seriesModel.getPoster_ImageUrl());
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_OVERVIEW,
-                            seriesModel.getOverview());
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_VOTE_AVERAGE,
-                            seriesModel.getVote_average());
-                    movieValues.put(SeriesContract.SeriesEntry.COLUMN_SERIES_RELEASE_DATE,
-                            seriesModel.getRelease_Date());
-
-                    getActivity().getContentResolver().insert(
-                            SeriesContract.SeriesEntry.CONTENT_URI,
-                            movieValues
-                    );
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                Favourite.setImageResource(R.drawable.staron);
+                favourite.setImageResource(R.drawable.unfavorite);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -156,15 +140,15 @@ public class AnimeDetailedFragment extends Fragment {
             @Override
             protected Void doInBackground(Void... params) {
                 if (isFavorite()) {
-                    getActivity().getContentResolver().delete(SeriesContract.SeriesEntry.CONTENT_URI,
-                            SeriesContract.SeriesEntry.COLUMN_SERIES_ID + " = " + seriesModel.getId(), null);
+                    getActivity().getContentResolver().delete(AnimeContract.FavouriteAnimeEntry.CONTENT_URI,
+                            AnimeContract.FavouriteAnimeEntry.COLUMN_anime_ID + " = " + anime.id, null);
                 }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                Favourite.setImageResource(R.drawable.staroff);
+                favourite.setImageResource(R.drawable.favorite);
 
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -173,9 +157,9 @@ public class AnimeDetailedFragment extends Fragment {
 
     private boolean isFavorite() {
         Cursor movieCursor = getActivity().getContentResolver().query(
-                SeriesContract.SeriesEntry.CONTENT_URI,
-                new String[]{SeriesContract.SeriesEntry.COLUMN_SERIES_ID},
-                SeriesContract.SeriesEntry.COLUMN_SERIES_ID + " = " + seriesModel.getId(),
+                AnimeContract.FavouriteAnimeEntry.CONTENT_URI,
+                new String[]{ AnimeContract.FavouriteAnimeEntry.COLUMN_anime_ID},
+                AnimeContract.FavouriteAnimeEntry.COLUMN_anime_ID + " = " + anime.id,
                 null,
                 null);
 
@@ -186,4 +170,6 @@ public class AnimeDetailedFragment extends Fragment {
             return false;
         }
     }
-*/
+
+}
+
