@@ -5,6 +5,15 @@
     <color name="colorAccent">#3F51B5</color>
 
 
+
+    <color name="photo_placeholder">#ccc</color>
+    <color name="bg">#ffe8a0</color>
+    <color name="ltgray">#ffe0e0e0</color>
+    <color name="val">#FF4081</color>
+    <color name="blackColor">#000</color>
+
+
+
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
     <color name="bg_main">#428bca</color>

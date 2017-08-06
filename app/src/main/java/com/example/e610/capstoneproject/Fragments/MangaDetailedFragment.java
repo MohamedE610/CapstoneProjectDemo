@@ -8,12 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.e610.capstoneproject.Data.AnimeContract;
-import com.example.e610.capstoneproject.Models.Manga.Attributes;
 import com.example.e610.capstoneproject.Models.Manga.Datum;
 import com.exampleAnime.e610.capstoneproject.R;
 import com.google.gson.Gson;
@@ -30,7 +27,8 @@ public class MangaDetailedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-       View view =inflater.inflate(R.layout.fragment_detailed,container,false);
+       View view =inflater.inflate(R.layout.fragment_anime_detail,container,false);
+/*
 
         TextView textView1=(TextView)view.findViewById(R.id.story);
         TextView textView2=(TextView)view.findViewById(R.id.rating);
@@ -54,6 +52,7 @@ public class MangaDetailedFragment extends Fragment {
                 markAsFavorite();
             }
         });
+*/
 
         return view;
     }

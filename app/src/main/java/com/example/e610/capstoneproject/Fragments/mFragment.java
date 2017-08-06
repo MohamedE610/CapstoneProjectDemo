@@ -1,9 +1,9 @@
-package com.example.e610.capstoneproject.Activitys;
+package com.example.e610.capstoneproject.Fragments;
 
-import android.app.LoaderManager;
 import android.content.Intent;
-import android.database.Cursor;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,19 +15,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.e610.capstoneproject.Data.AnimeContract;
-import com.example.e610.capstoneproject.Fragments.FavouriteFragment;
-import com.example.e610.capstoneproject.Fragments.MangaMainFragment;
-import com.example.e610.capstoneproject.Fragments.AnimeMainFragment;
-
-
-import com.example.e610.capstoneproject.Fragments.mFragment;
+import com.example.e610.capstoneproject.Activitys.LoginActivity;
 import com.exampleAnime.e610.capstoneproject.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,27 +30,37 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-/*public class MainActivity extends AppCompatActivity implements  TabLayout.OnTabSelectedListener
-        , NavigationView.OnNavigationItemSelectedListener {*/
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by E610 on 8/6/2017.
+ */
+public class mFragment extends Fragment implements  TabLayout.OnTabSelectedListener
+        , NavigationView.OnNavigationItemSelectedListener{
 
-    //RecyclerView recyclerView;
 
-    /*private Toolbar toolbar;
+
+    private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FirebaseAuth.AuthStateListener authListener;
-    private FirebaseAuth auth;*/
-
-    mFragment fragment;
+    private FirebaseAuth auth;
+    View view;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.m_frag);
-        /*toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+         view=inflater.inflate(R.layout.activity_navigation_drawer,container,false);
+
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        AppCompatActivity appCompatActivity=(AppCompatActivity)getActivity();
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        appCompatActivity.setSupportActionBar(toolbar);
 
 
         //get firebase auth instance
@@ -71,115 +76,71 @@ public class MainActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getActivity().finish();
                 }
             }
         };
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                getActivity(), drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) view.findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager,2);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        setupViewPager(viewPager,0);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-        tabLayout.addOnTabSelectedListener(this);*/
-            fragment=new mFragment();
-             getSupportFragmentManager().beginTransaction().add(R.id.m_frag,fragment).commit();
+        tabLayout.addOnTabSelectedListener(this);
 
+
+        return view;
     }
 
-
-
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }*/
-
-  /*  @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-            Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
             displaySelectedScreen(id);
 
         } else if (id == R.id.nav_gallery) {
-            Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
             displaySelectedScreen(id);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
             signOut();
         }
         else if (id == R.id.fav_ani) {
-            Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
             displaySelectedScreen(id);
-          //  reStartLoader.restartLoader();
+            //  reStartLoader.restartLoader();
 //            String s=getFavouriteMovies(id);
-          //  Toast.makeText(MainActivity.this, s ,Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(MainActivity.this, s ,Toast.LENGTH_SHORT).show();
 
         }
         else if (id == R.id.fav_man) {
-            Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
-           // String s=getFavouriteMovies(id);
-           // Toast.makeText(MainActivity.this, s ,Toast.LENGTH_SHORT).show();
+           // Toast.makeText(MainActivity.this," ^__^ " + id,Toast.LENGTH_SHORT).show();
+            // String s=getFavouriteMovies(id);
+            // Toast.makeText(MainActivity.this, s ,Toast.LENGTH_SHORT).show();
 
         }
 
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) view.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-
-
-
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-
-    }
-
-
-    private String  getFavouriteMovies(int id) {
-        String s="";
-        Cursor cursor;
-        if (id == R.id.fav_ani)
-             cursor = getContentResolver().query(AnimeContract.FavouriteAnimeEntry.CONTENT_URI,null,null,null,null);
-        else
-            cursor = getContentResolver().query(AnimeContract.FavouriteMangaEntry.CONTENT_URI,null,null,null,null);
-
-        while (cursor.moveToNext()){
-
-                s += cursor.getString(AnimeContract.FavouriteAnimeEntry.COL_anime_ID);
-                s += "\n\n";
-                s += cursor.getString(AnimeContract.FavouriteAnimeEntry.COL_anime_content);
-                s += "\n\n";
-
-        }
-
-        return s;
     }
 
     private void displaySelectedScreen(int itemId) {
@@ -191,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         switch (itemId) {
             case R.id.nav_camera:
                 setupViewPager(viewPager,0);
-            break;
+                break;
             case R.id.nav_gallery:
                 setupViewPager(viewPager,1);
                 break;
@@ -201,14 +162,14 @@ public class MainActivity extends AppCompatActivity {
         }
         //replacing the fragment
         if (fragment != null) {
-            viewPager.setVisibility(View.GONE);
-            frameLayout.setVisibility(View.VISIBLE);
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            /*viewPager.setVisibility(View.GONE);
+            frameLayout.setVisibility(View.VISIBLE);*/
+            FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_, fragment);
             ft.commit();
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+       /* DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);*/
     }
 
 
@@ -216,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager ,int i) {
         if(i==0) {
 
-            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
-           //Most Popular Anime
+            //Most Popular Anime
             AnimeMainFragment animeMainFragment =new AnimeMainFragment();
             animeMainFragment.setUrl("https://kitsu.io/api/edge/anime?sort=popularityRank&page[limit]=20&page[offset]=0");
 
@@ -243,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(i==1){
 
-            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
             //Most Popular Manga
             MangaMainFragment mangaMainFragment =new MangaMainFragment();
@@ -270,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
         else if(i==2){
 
             //ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
 
             FavouriteFragment favouriteFragment=new FavouriteFragment();
             FavouriteFragment favouriteFragment1=new FavouriteFragment();
@@ -283,28 +244,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        Toast.makeText(MainActivity.this,"^__^ " + tab.getPosition(),Toast.LENGTH_SHORT).show();
-        *//*frameLayout.setVisibility(View.GONE);
-        viewPager.setVisibility(View.VISIBLE);*//*
-    }
-
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
-
-    }
-
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
-
-    }
-
-
-    *//*
+    /*
     class ViewPagerAdapter extends FragmentPagerAdapter {
         this line cause logic error "display fragments in view pager when i reset it in wrong way"
-        *//*
+        */
 
     class ViewPagerAdapter extends FragmentStatePagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
@@ -335,36 +278,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onTabSelected(TabLayout.Tab tab) {
 
-        getMenuInflater().inflate(R.menu.menu, menu);
-
-        return true;
     }
 
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public void onTabReselected(TabLayout.Tab tab) {
 
-        int id=item.getItemId();
-
-        switch (id){
-            case R.id.action_sign_out:
-                signOut();
-                break;
-            default:
-                break;
-        }
-
-        return true;
     }
 
     //sign out method
     public void signOut() {
         auth.signOut();
-        startActivity(new Intent(MainActivity.this,LoginActivity.class));
-        finish();
-    }*/
-
-}
+        startActivity(new Intent(getActivity(),LoginActivity.class));
+        getActivity().finish();
+    }}

@@ -25,6 +25,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             android:configChanges="keyboardHidden|orientation|screenSize">
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +40,8 @@
             android:name="com.example.e610.capstoneproject.Activitys.ResetPasswordActivity"
             android:label="@string/title_activity_reset_password"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.e610.capstoneproject.Activitys.DetailedActivity"></activity>
+        <activity android:name="com.example.e610.capstoneproject.Activitys.DetailedActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"></activity>
 
         <provider
             android:name="com.example.e610.capstoneproject.Data.AnimeProvider"
